@@ -1,15 +1,11 @@
-import { SET, RESET } from '../types/user'
+import { LOGIN } from '../types/user';
 
-export function set(payload){
+export function login(payload) {
   return {
-    type: SET
-  , payload
+    type: LOGIN,
+    payload: {
+      email: payload.email,
+      password: payload.password,
+    }
   }
-}
-
-export function reset(){
-  return {
-    type: RESET
-  }
-}
-
+};
