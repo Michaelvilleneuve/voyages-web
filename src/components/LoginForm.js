@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
-import * as userActions from '../actions/user'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userActions from '../actions/user';
 
 class LoginForm extends Component {
   state = {
-    password: "",
-    email: ""
+    password: '',
+    email: ''
   }
 
   mailChanged(e) {
@@ -29,8 +28,10 @@ class LoginForm extends Component {
       <div className="col s4">
         <div className="row">
           <form className="col s12">
-            <h4>Log in</h4>
             <div className="row">
+              <div className="col s12">
+                <h4>Log in</h4>
+              </div>
               <div className="input-field col s12">
                 <input
                   type="email"
@@ -53,13 +54,15 @@ class LoginForm extends Component {
               </div>
             </div>
             <div className="row">
-              <button
-                type="button"
-                onClick={this.login.bind(this)}
-                className="waves-effect waves-light btn-large"
-              >
-                Envoyer
-              </button>
+              <div className="col s12">
+                <button
+                  type="button"
+                  onClick={this.login.bind(this)}
+                  className="waves-effect waves-light btn-large"
+                >
+                  Send
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -70,13 +73,6 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-
 const mapDispatchToProps = dispatch => bindActionCreators(userActions, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginForm)
+export default connect(null, mapDispatchToProps)(LoginForm);

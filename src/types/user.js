@@ -1,3 +1,3 @@
-const prefix = 'USER/'
+const prefix = 'USER/';
 
-export const LOGIN = prefix + 'LOGIN';
+export const LOGIN = `${prefix}LOGIN`;

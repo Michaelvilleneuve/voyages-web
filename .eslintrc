@@ -1,0 +1,21 @@
+{
+  "extends": "rallycoding",
+  "rules": {
+    "arrow-body-style": 0,
+    "global-require": 0,
+    "no-unused-expressions": 0,
+  },
+  "globals": {
+    "fetch": false,
+    "alert": false,
+    "FormData": false,
+    "Headers": false,
+    "__DEV__": false,
+    "path": false,
+    "describe": false,
+    "it": false,
+    "window": false,
+    "sessionStorage": false,
+    "document": false
+  }
+}
