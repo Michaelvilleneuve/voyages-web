@@ -2,28 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as voyagesActions from '../../../actions/voyages';
+import Voyage from './voyage/Voyage';
 
-class App extends Component {
+class List extends Component {
   componentWillMount() {
     this.props.setList();
   }
 
   render() {
+    if (this.props.journeys.length === 0) return (<p>Vous n'avez aucun voyage.</p>);
     return (
-      <ul className="collection">
-        {this.props.journeys.map(voyage => {
-          return (
-            <li className="collection-item avatar">
-              <img src="{voyage.image}" alt="" className="circle" />
-              <span className="title">{voyage.title}</span>
-              <p>
-                {voyage.description}
-              </p>
-              <a href="#!" className="secondary-content"><i className="material-icons">Voir</i></a>
-            </li>
-          );
-        })}
-      </ul>
+      <section id="voyages">
+        {this.props.journeys.map((voyage, i) => <Voyage key={i} voyage={voyage} />)}
+      </section>
     );
   }
 }
@@ -33,4 +24,4 @@ const mapStateToProps = ({ voyages }) => {
   return { journeys: voyages.journeys };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(List);

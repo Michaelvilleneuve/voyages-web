@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from '../actions/user';
+import Button from './shared/Button';
+import Input from './shared/Input';
+import Label from './shared/Label';
+import Loadr from './shared/Loadr';
+import './LoginForm.css';
+
 
 class LoginForm extends Component {
   state = {
@@ -21,58 +27,49 @@ class LoginForm extends Component {
     this.props.login(this.state);
   }
 
+  renderButton() {
+    if (this.props.logging) return <Loadr style={{ marginTop: 20 }} />;
+    return (
+      <Button type="button" onClick={this.login.bind(this)}>
+        Se connecter
+      </Button>
+    );
+  }
+
+  renderError() {
+    if (this.props.error !== '' && !this.props.logging) return <span>{this.props.error}</span>;
+  }
+
   render() {
     return (
-    <section className="row">
-      <div className="col s4" />
-      <div className="col s4">
-        <div className="row">
-          <form className="col s12">
-            <div className="row">
-              <div className="col s12">
-                <h4>Log in</h4>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  type="email"
-                  className="validate"
-                  onChange={this.mailChanged.bind(this)}
-                  value={this.state.email}
-                />
-                <label htmlFor="email">Email</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s12">
-                <input
-                  type="password"
-                  className="validate"
-                  onChange={this.passChanged.bind(this)}
-                  value={this.state.password}
-                />
-                <label htmlFor="password">Password</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col s12">
-                <button
-                  type="button"
-                  onClick={this.login.bind(this)}
-                  className="waves-effect waves-light btn-large"
-                >
-                  Send
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div className="col s4" />
-    </section>
+      <section className="loginForm">
+        <form>
+          <h1>Votre blog voyage</h1>
+          <hr />
+          <Label htmlFor="email">Email</Label>
+          <Input
+            type="email"
+            onChange={this.mailChanged.bind(this)}
+            value={this.state.email}
+          />
+          <Label htmlFor="password">Mot de passe</Label>
+          <Input
+            type="password"
+            onChange={this.passChanged.bind(this)}
+            value={this.state.password}
+          />
+          {this.renderButton()}
+          {this.renderError()}
+        </form>
+      </section>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(userActions, dispatch);
+const mapStateToProps = ({ user }) => {
+  const { error, isLogging } = user;
+  return { error, isLogging };
+};
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

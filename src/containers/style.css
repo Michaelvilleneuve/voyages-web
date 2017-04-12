@@ -1,0 +1,260 @@
+@font-face {
+	font-family: "Proxima Nova";
+	src: url('./fonts/proxima-nova-light.woff') format("woff");
+}
+@font-face{
+    font-family : "Butler";
+    src : url('./fonts/Butler-Regular.woff') format('woff');
+    font-weight: 100;
+}
+@font-face{
+    font-family : "Butler";
+    src : url('./fonts/Butler-Medium.woff') format('woff');
+    font-weight: 400;
+}
+@font-face{
+    font-family : "Poppins";
+    src : url('./fonts/Poppins-Regular.woff') format('woff');
+    font-weight: 100;
+}
+@font-face{
+    font-family : "Poppins";
+    src : url('./fonts/Poppins-Medium.woff') format('woff');
+    font-weight: 300;
+}
+@font-face{
+    font-family : "Poppins";
+    src : url('./fonts/Poppins-SemiBold.woff') format('woff');
+    font-weight: 400;
+}
+@font-face{
+    font-family : "Poppins";
+    src : url('./fonts/Poppins-Bold.woff') format('woff');
+    font-weight: 800;
+}
+
+html {
+	height: 100%;
+}
+body {
+	font-family: 'Proxima Nova';
+	font-weight: 100;
+	height: 100%;
+	margin: 0;
+	font-size: 17px;
+	color: #000;
+}
+h1, h2, h3 {
+	font-family: 'Butler';
+}
+h1 {
+	font-weight: 100;
+	font-size: 45px;
+	margin: 15px 0;
+	text-align: left;
+}
+h2 {
+	font-weight: 100;
+	font-size: 27px;
+}
+hr {
+	width: 100px;
+	border-color: #000;
+	border-width: 2px;
+	border-top: 0;
+	margin-left: 0;
+}
+a {
+	text-decoration: none;
+}
+
+#voyages {
+	margin: 0px auto 100px auto;
+	width: 100%;
+	max-width: 900px;
+}
+
+.voyage-single {
+	width: 100%;
+	margin: 130px 0;
+	padding: 10px;
+	box-sizing: border-box;
+}
+.voyage-single header {
+	margin-bottom: 30px;
+}
+.voyage-single .btn {
+	padding: 10px;
+	background: white;
+	border: 1px solid #000;
+	color: black;
+  transition: all .25s ease-in-out;
+}
+.voyage-single .btn:hover {
+	background: black;
+	color:white
+}
+.voyage-single img {
+	max-width: 100%;
+    background-color: grey;
+	margin: 10px 0px 30px;
+}
+.voyage-single .description {
+	text-align: justify;
+}
+#back-to-top {
+	cursor: pointer;
+}
+#back-to-top > svg {
+	width: 30px;
+	opacity: 1;
+  transition: all .25s ease-in-out;
+}
+#back > svg {
+	width: 30px;
+}
+#back {
+  color: #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+
+.hidden {
+	opacity: 0;
+	visibility: hidden;
+}
+
+#cover {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+  padding: 30px;
+  box-sizing: border-box;
+}
+#cover img {
+	width: 100%;
+	min-height: 100%;
+}
+
+#cover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: white;
+}
+
+#cover > #cover-info {
+  position: absolute;
+  top: 30%;
+  max-width: 400px;
+  left: 10%;
+  background: rgba(255, 255, 255, .95);
+  padding: 30px;
+
+}
+#cover-info p {
+	text-align: justify;
+}
+#cover-info h1 {
+	margin-top: 0;
+	font-size: 40px;
+}
+#cover-info .info {
+	margin-bottom: 0;
+}
+
+.other-trips {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.other-trips img {
+	height: 160px;
+}
+.other-trips .title {
+	width: 66%;
+	padding: 10px;
+}
+.other-trips .title h4 {
+	margin: 0px 0px 2px;
+  font-weight: 800;
+  color: #666;
+  font-size: 97%;
+}
+.other-trips .title a {
+	color: black;
+}
+.other-trip {
+	width: 50%;
+	display: flex;
+	align-items: top;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding: 20px;
+}
+.hidden-lg {
+	display: none;
+}
+
+@media all and (max-width: 767px) {
+	body {
+		padding: 15px;
+	}
+	p {
+		text-align: left !important;
+	}
+	.voyage-single {
+		margin: 90px 0;
+	}
+	.voyage-single img {
+		margin: 7px 0px 7px
+	}
+	#cover {
+		height: auto;
+		padding: 0;
+	}
+	#cover img {
+		min-height: auto;
+		width: 100%;
+	}
+	#cover::after {
+		display: none;
+	}
+	#cover > #cover-info {
+		position: relative;
+		background: transparent;
+		left: auto;
+		padding: 0;
+		padding-top: 20px;
+		top: 0;
+	}
+	.other-trip {
+		width: 100%;
+		display: flex;
+		align-items: center;
+	}
+	section#voyages img.cache {
+		margin: 10px 0px 30px !important;
+	}
+	article > .voyage-single:first-child {
+		margin: 30px 0;
+	}
+	.hidden-xs {
+		display: none;
+	}
+	.hidden-lg {
+		display: block;
+	}
+	.cover-mb {
+		width: 100%;
+	}
+}
