@@ -1,61 +1,5 @@
-@font-face {
-	font-family: "Proxima Nova";
-	src: url('./fonts/proxima-nova-light.woff') format("woff");
-}
-@font-face{
-    font-family : "Butler";
-    src : url('./fonts/Butler-Regular.woff') format('woff');
-    font-weight: 100;
-}
-@font-face{
-    font-family : "Butler";
-    src : url('./fonts/Butler-Medium.woff') format('woff');
-    font-weight: 400;
-}
-@font-face{
-    font-family : "Poppins";
-    src : url('./fonts/Poppins-Regular.woff') format('woff');
-    font-weight: 100;
-}
-@font-face{
-    font-family : "Poppins";
-    src : url('./fonts/Poppins-Medium.woff') format('woff');
-    font-weight: 300;
-}
-@font-face{
-    font-family : "Poppins";
-    src : url('./fonts/Poppins-SemiBold.woff') format('woff');
-    font-weight: 400;
-}
-@font-face{
-    font-family : "Poppins";
-    src : url('./fonts/Poppins-Bold.woff') format('woff');
-    font-weight: 800;
-}
-
-html {
-	height: 100%;
-}
 body {
-	font-family: 'Proxima Nova';
-	font-weight: 100;
-	height: 100%;
 	margin: 0;
-	font-size: 17px;
-	color: #000;
-}
-h1, h2, h3 {
-	font-family: 'Butler';
-}
-h1 {
-	font-weight: 100;
-	font-size: 45px;
-	margin: 15px 0;
-	text-align: left;
-}
-h2 {
-	font-weight: 100;
-	font-size: 27px;
 }
 hr {
 	width: 100px;
@@ -66,12 +10,6 @@ hr {
 }
 a {
 	text-decoration: none;
-}
-
-#voyages {
-	margin: 0px auto 100px auto;
-	width: 100%;
-	max-width: 900px;
 }
 
 .voyage-single {
