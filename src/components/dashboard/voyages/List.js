@@ -9,10 +9,14 @@ class List extends Component {
     this.props.setList();
   }
 
-  render() {
+  renderEmpty() {
     if (this.props.journeys.length === 0) return (<p>Vous n'avez aucun voyage.</p>);
+  }
+
+  render() {
     return (
       <section id="voyages">
+        {this.renderEmpty()}
         {this.props.journeys.map((voyage, i) => <Voyage key={i} voyage={voyage} />)}
       </section>
     );
