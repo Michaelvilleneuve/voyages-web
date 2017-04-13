@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Dialog from 'material-ui/Dialog';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
 import * as userActions from '../actions/user';
-import Button from './shared/Button';
-import Input from './shared/Input';
-import Label from './shared/Label';
-import Loadr from './shared/Loadr';
 import './LoginForm.css';
 
 
@@ -28,12 +27,7 @@ class LoginForm extends Component {
   }
 
   renderButton() {
-    if (this.props.logging) return <Loadr style={{ marginTop: 20 }} />;
-    return (
-      <Button type="button" onClick={this.login.bind(this)}>
-        Se connecter
-      </Button>
-    );
+    return [<FlatButton primary label="Se connecter" onClick={this.login.bind(this)} />];
   }
 
   renderError() {
@@ -41,26 +35,38 @@ class LoginForm extends Component {
   }
 
   render() {
+    const s = {
+      width: '100%',
+      maxWidth: '500px',
+    };
+
     return (
       <section className="loginForm">
-        <form>
-          <h1>Votre blog voyage</h1>
-          <hr />
-          <Label htmlFor="email">Email</Label>
-          <Input
+        <Dialog
+          title="Se connecter"
+          open={!this.props.isLogging}
+          actions={this.renderButton()}
+          contentStyle={s}
+        >
+          <TextField
+            hintText="votre@email.com"
+            floatingLabelText="Email"
             type="email"
+            validate
             onChange={this.mailChanged.bind(this)}
             value={this.state.email}
+            fullWidth
           />
-          <Label htmlFor="password">Mot de passe</Label>
-          <Input
+          <TextField
+            hintText="Minimum 6 charactères"
+            floatingLabelText="Password"
             type="password"
             onChange={this.passChanged.bind(this)}
             value={this.state.password}
+            fullWidth
           />
-          {this.renderButton()}
           {this.renderError()}
-        </form>
+        </Dialog>
       </section>
     );
   }
