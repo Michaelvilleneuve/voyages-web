@@ -7,8 +7,8 @@ body {
 }
 
 input[name="place"]::placeholder {
-    font-weight: 200;
-    color: #a3a3a3;
+  font-weight: 200;
+  color: #a3a3a3;
 }
 
 .flex-center {
