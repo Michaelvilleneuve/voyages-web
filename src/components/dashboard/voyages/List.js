@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as voyagesActions from '../../../actions/voyages';
 import Voyage from './voyage/Voyage';
+import './List.css';
 
 class List extends Component {
   componentWillMount() {

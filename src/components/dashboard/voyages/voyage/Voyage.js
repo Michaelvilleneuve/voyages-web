@@ -1,30 +1,27 @@
 import React, { Component } from 'react';
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import './Voyage.css';
 
 export default class Voyage extends Component {
   render() {
     const voyage = this.props.voyage;
     return (
-      <div className="voyage-single">
-        <header>
-          <h1>{voyage.title}</h1>
-          <hr />
-        </header>
-        <div className="description">
-          {voyage.description}
-        </div>
-
-        <p className="info">Voyage du 21 Août au 30 Août 2016</p>
-
-        <img
-          className="cache"
-          data-src="{voyage.image}"
-          src="{voyage.image}"
-          width="2200"
-          alt="{voyage.title}"
+      <Card className="voyage-single">
+        <CardTitle
+          actAsExpander
+          showExpandableButton
+          title={voyage.title}
+          subtitle={`Du ${voyage.starts_at} au ${voyage.ends_at}`}
         />
-
-        <a href="/cassis" className="btn">Découvrir notre voyage</a>
-      </div>
+        <CardText expandable>
+          {voyage.description}
+        </CardText>
+        <CardActions>
+          <FlatButton label="Revivre" />
+          <FlatButton label="Modifier" primary />
+        </CardActions>
+      </Card>
     );
   }
 }
