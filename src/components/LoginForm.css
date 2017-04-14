@@ -5,10 +5,8 @@
   height: 100vh;
   padding: 30px;
   box-sizing: border-box;
-  background: url('https://voyages.michaelvilleneuve.fr/admin/storage/cache/thumbs/8211a4536f098f877e202085e8b3574c_1760x1280_100_1473953719_best_fit.JPG')  left top / cover content-box content-box;
 }
 .loginForm form {
-  background-color: rgba(255,255,255, 0.95);
   box-shadow: 1px 0px 50px #000;
   padding: 30px;
   max-width: 400px;

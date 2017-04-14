@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Dialog from 'material-ui/Dialog';
+import { Link } from 'react-router';
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import * as userActions from '../actions/user';
@@ -26,47 +27,41 @@ class LoginForm extends Component {
     this.props.login(this.state);
   }
 
-  renderButton() {
-    return [<FlatButton primary label="Se connecter" onClick={this.login.bind(this)} />];
-  }
-
-  renderError() {
-    if (this.props.error !== '' && !this.props.logging) return <span>{this.props.error}</span>;
-  }
-
   render() {
-    const s = {
-      width: '100%',
-      maxWidth: '500px',
-    };
-
     return (
       <section className="loginForm">
-        <Dialog
-          title="Se connecter"
-          open={!this.props.isLogging}
-          actions={this.renderButton()}
-          contentStyle={s}
-        >
-          <TextField
-            hintText="votre@email.com"
-            floatingLabelText="Email"
-            type="email"
-            validate
-            onChange={this.mailChanged.bind(this)}
-            value={this.state.email}
-            fullWidth
+        <Card style={{ width: '90%', maxWidth: 600 }}>
+          <CardTitle
+            title="Voyages"
+            subtitle="Partagez votre histoire, écrivez vos souvenirs"
+            style={{ paddingBottom: 0 }}
           />
-          <TextField
-            hintText="Minimum 6 charactères"
-            floatingLabelText="Password"
-            type="password"
-            onChange={this.passChanged.bind(this)}
-            value={this.state.password}
-            fullWidth
-          />
-          {this.renderError()}
-        </Dialog>
+          <CardText style={{ paddingTop: 0 }}>
+            <TextField
+              hintText="votre@email.com"
+              floatingLabelText="Email"
+              type="email"
+              validate
+              onChange={this.mailChanged.bind(this)}
+              value={this.state.email}
+              fullWidth
+            />
+            <TextField
+              hintText="Minimum 6 charactères"
+              floatingLabelText="Mot de passe"
+              type="password"
+              onChange={this.passChanged.bind(this)}
+              value={this.state.password}
+              fullWidth
+            />
+          </CardText>
+          <CardActions>
+            <FlatButton primary label="Se connecter" onClick={this.login.bind(this)} />
+            <Link to="/users/new">
+              <FlatButton label="Créer un compte" />
+            </Link>
+          </CardActions>
+        </Card>
       </section>
     );
   }
