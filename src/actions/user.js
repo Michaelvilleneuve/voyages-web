@@ -18,6 +18,22 @@ export function login(payload) {
   };
 }
 
+export function createAccount(payload) {
+  return (dispatch) => {
+    dispatch({ type: LOGIN });
+    API.post('/users/', JSON.stringify(payload))
+      .then(res => res.json())
+      .then((res) => {
+        if (res.user) {
+          sessionStorage.setItem('token', res.user.token);
+          browserHistory.push('/dashboard');
+          dispatch({ type: LOGGED_IN });
+        }
+      })
+      .catch(() => dispatch({ type: LOGIN_FAIL, payload: 'Impossible de se connecter' }));
+  };
+}
+
 export function fetchUser() {
   return (dispatch) => {
     dispatch({ type: LOGIN });
