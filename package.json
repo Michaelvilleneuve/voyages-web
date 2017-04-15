@@ -22,6 +22,7 @@
     "react": "^15.5.3",
     "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.5.3",
+    "react-dropzone": "^3.12.4",
     "react-geosuggest": "^2.1.0",
     "react-loaders": "^2.4.1",
     "react-redux": "^5.0.2",
