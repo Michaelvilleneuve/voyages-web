@@ -27,6 +27,13 @@ const API = {
     }).then(response => API.checkStatus(response));
   },
 
+  async delete(url) {
+    return fetch(this.getUrl(url), {
+      headers: await API.headers(),
+      method: 'DELETE',
+    }).then(response => API.checkStatus(response));
+  },
+
   async post(url, data, headers = {}) {
     return fetch(this.getUrl(url), {
       headers: await API.headers(headers),
