@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import moment from 'moment';
 import FlatButton from 'material-ui/FlatButton';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as voyagesActions from '../../../../actions/voyages';
 import './Voyage.css';
 
-export default class Voyage extends Component {
+class Voyage extends Component {
   format(date) {
     return moment(date).locale('fr').format('LL');
+  }
+
+  deleteVoyage() {
+    if (confirm('Voulez-vous vraiment supprimer ce voyage ?')) {
+      this.props.deleteVoyage(this.props.voyage._id);
+    }
   }
 
   renderSubtitle() {
@@ -14,7 +23,6 @@ export default class Voyage extends Component {
     if (!v.starts_at) return null;
     return `Du ${this.format(v.starts_at)} au ${this.format(v.ends_at)}`;
   }
-
 
   render() {
     const voyage = this.props.voyage;
@@ -32,8 +40,13 @@ export default class Voyage extends Component {
         <CardActions>
           <FlatButton label="Revivre" />
           <FlatButton label="Modifier" primary />
+          <FlatButton label="Supprimer" secondary onClick={this.deleteVoyage.bind(this)} />
         </CardActions>
       </Card>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => bindActionCreators(voyagesActions, dispatch);
+
+export default connect(null, mapDispatchToProps)(Voyage);
