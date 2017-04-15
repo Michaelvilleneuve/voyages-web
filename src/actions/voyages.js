@@ -4,27 +4,46 @@ import API from '../api/api';
 
 export function setList() {
   return (dispatch) => {
-    API.get('/journeys/')
-      .then((res) => res.json())
-      .then((journeys) => {
-        dispatch({
-          type: LIST,
-          payload: { journeys }
-        });
-      });
+    fetchVoyages(dispatch);
   };
+}
+
+function fetchVoyages(dispatch) {
+  API.get('/journeys/')
+    .then((res) => res.json())
+    .then((journeys) => {
+      dispatch({
+        type: LIST,
+        payload: { journeys }
+      });
+    });
 }
 
 export function createVoyage(form) {
   return (dispatch) => {
-    const data = JSON.stringify(form);
-    API.post('/journeys/', data)
+    const reader = new FileReader();
+    reader.readAsDataURL(form.file);
+    reader.addEventListener('load', () => {
+      const data = JSON.stringify(Object.assign({ image: reader.result }, form));
+      API.post('/journeys/', data)
       .then((res) => res.json())
       .then((journey) => {
         if ('errors' in journey) {
           renderFormErrors(journey, dispatch);
         } else {
           browserHistory.push('/dashboard');
+        }
+      });
+    });
+  };
+}
+
+export function deleteVoyage(id) {
+  return (dispatch) => {
+    API.delete(`/journeys/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          fetchVoyages(dispatch);
         }
       });
   };
