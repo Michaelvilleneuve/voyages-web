@@ -26,25 +26,22 @@ class LoginForm extends Component {
   createAccount() { this.props.createAccount(this.state); }
 
   creating() {
-    this.setState({
-      login: !this.state.login,
-      name: this.state.login ? '' : this.state.name
-    });
+    this.setState({ login: !this.state.login });
   }
 
   renderActions() {
     if (this.state.login) {
       return (
         <div>
-          <FlatButton primary label="Se connecter" onClick={this.login.bind(this)} />
+          <FlatButton primary label="Envoyer" onClick={this.login.bind(this)} />
           <FlatButton label="Créer un compte" onClick={this.creating.bind(this)} />
         </div>
       );
     }
     return (
       <div>
-        <FlatButton primary label="M'enregistrer" onClick={this.createAccount.bind(this)} />
-        <FlatButton label="J'ai un compte" onClick={this.creating.bind(this)} />
+        <FlatButton primary label="Envoyer" onClick={this.createAccount.bind(this)} />
+        <FlatButton label="Se connecter" onClick={this.creating.bind(this)} />
       </div>
     );
   }
@@ -68,7 +65,7 @@ class LoginForm extends Component {
       <Center>
         <Card style={{ width: '90%', maxWidth: 600 }}>
           <CardTitle
-            title="Voyages"
+            title={this.state.login ? 'Se connecter' : 'Créer un compte'}
             subtitle="Partagez votre histoire, écrivez vos souvenirs"
             style={{ paddingBottom: 0 }}
           />
