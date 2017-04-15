@@ -13,7 +13,7 @@ class Form extends Component {
   state = {}
 
   onDrop(files) {
-    console.log(files);
+    this.setState({ file: files[0] });
   }
 
   changed(event) {
@@ -38,6 +38,12 @@ class Form extends Component {
     this.props.createVoyage(this.state);
   }
 
+  renderImage() {
+    if (!this.state.file) return null;
+    return (
+      <img src={this.state.file.preview} alt="Couverture" style={{ width: 100 }} />
+    );
+  }
 
   render() {
     return (
@@ -88,13 +94,19 @@ class Form extends Component {
               errorText={this.props.errors.description}
               onChange={this.changed.bind(this)}
             />
-            <Dropzone className="dropzone" onDrop={this.onDrop.bind(this)} multiple={false}>
-              <div style={{ textAlign: 'center' }}>
-                <FileUpload color="#999" />
-                <p style={{ color: '#999' }}>Image de couverture</p>
-              </div>
-            </Dropzone>
-            {this.renderImage}
+              <Dropzone
+                className="dropzone"
+                onDrop={this.onDrop.bind(this)}
+                multiple={false}
+              >
+                <div style={{ textAlign: 'center' }}>
+                  <FileUpload color="#999" width={40} />
+                  <p style={{ color: '#999' }}>
+                    {this.state.file ? 'Changer d\'image' : 'Image de couverture' }
+                  </p>
+                </div>
+              </Dropzone>
+              {this.renderImage()}
           </CardText>
           <CardText>
             <Toggle
