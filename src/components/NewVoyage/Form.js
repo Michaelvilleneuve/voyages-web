@@ -3,11 +3,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import { DatePicker, TextField, Toggle, FlatButton } from 'material-ui';
+import FileUpload from 'material-ui/svg-icons/file/cloud-upload';
+import Dropzone from 'react-dropzone';
 import Place from 'material-ui-geosuggest';
 import * as voyagesActions from '../../actions/voyages';
+import './Form.css';
 
 class Form extends Component {
   state = {}
+
+  onDrop(files) {
+    console.log(files);
+  }
 
   changed(event) {
     const target = event.target;
@@ -31,9 +38,10 @@ class Form extends Component {
     this.props.createVoyage(this.state);
   }
 
+
   render() {
     return (
-      <div style={{ float: 'left', width: '50%', paddingTop: 30 }}>
+      <div style={{ width: '90%', paddingTop: 30, maxWidth: 670 }}>
         <Card>
           <CardTitle
             title="Créer un voyage"
@@ -80,6 +88,13 @@ class Form extends Component {
               errorText={this.props.errors.description}
               onChange={this.changed.bind(this)}
             />
+            <Dropzone className="dropzone" onDrop={this.onDrop.bind(this)} multiple={false}>
+              <div style={{ textAlign: 'center' }}>
+                <FileUpload color="#999" />
+                <p style={{ color: '#999' }}>Image de couverture</p>
+              </div>
+            </Dropzone>
+            {this.renderImage}
           </CardText>
           <CardText>
             <Toggle
