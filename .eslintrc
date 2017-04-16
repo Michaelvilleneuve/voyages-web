@@ -8,6 +8,7 @@
   },
   "globals": {
     "fetch": false,
+    "FileReader": false,
     "confirm": false,
     "alert": false,
     "FormData": false,
