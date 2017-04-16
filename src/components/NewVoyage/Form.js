@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
+import CircularProgress from 'material-ui/CircularProgress';
 import { DatePicker, TextField, Toggle, FlatButton } from 'material-ui';
 import FileUpload from 'material-ui/svg-icons/file/cloud-upload';
 import Dropzone from 'react-dropzone';
@@ -42,6 +43,23 @@ class Form extends Component {
     if (!this.state.file) return null;
     return (
       <img src={this.state.file.preview} alt="Couverture" style={{ width: 100 }} />
+    );
+  }
+
+  renderActions() {
+    if (this.props.creating) {
+      return (
+          <div style={{ textAlign: 'center' }}>
+            <CircularProgress size={30} thickness={3} />
+          </div>
+      );
+    }
+    return (
+      <FlatButton
+        label="Enregistrer"
+        primary
+        onClick={this.submit.bind(this)}
+      />
     );
   }
 
@@ -122,11 +140,7 @@ class Form extends Component {
             <br />
           </CardText>
           <CardActions>
-            <FlatButton
-              label="Enregistrer"
-              primary
-              onClick={this.submit.bind(this)}
-            />
+            {this.renderActions()}
           </CardActions>
         </Card>
       </div>
