@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardActions, CardTitle, CardText, CardMedia } from 'material-ui/Card';
 import moment from 'moment';
 import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import config from '../../../../config';
 import * as voyagesActions from '../../../../actions/voyages';
 import './Voyage.css';
 
@@ -28,6 +29,11 @@ class Voyage extends Component {
     const voyage = this.props.voyage;
     return (
       <Card className="voyage-single">
+        {voyage.image ?
+          <CardMedia>
+            <img alt={voyage.title} src={config.api.assets(voyage.image)} />
+          </CardMedia>
+          : null }
         <CardTitle
           actAsExpander
           showExpandableButton
