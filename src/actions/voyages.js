@@ -21,6 +21,15 @@ function fetchVoyages(dispatch) {
 
 export function createVoyage(form) {
   return (dispatch) => {
+    if (!form.file) {
+      return dispatch({
+        type: VALIDATE_FORM,
+        payload: {
+          image: 'Vous devez fournir une image de couverture'
+        }
+      });
+    }
+
     const reader = new FileReader();
     reader.readAsDataURL(form.file);
     reader.addEventListener('load', () => {
