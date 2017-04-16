@@ -104,6 +104,9 @@ class Form extends Component {
                   <p style={{ color: '#999' }}>
                     {this.state.file ? 'Changer d\'image' : 'Image de couverture' }
                   </p>
+                  <p style={{ color: 'red' }}>
+                    {this.props.errors.image}
+                  </p>
                 </div>
               </Dropzone>
               {this.renderImage()}
