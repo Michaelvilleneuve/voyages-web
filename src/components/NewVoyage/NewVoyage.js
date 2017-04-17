@@ -22,7 +22,7 @@ export default class NewVoyage extends Component {
               <Arrow />
             </FloatingActionButton>
           </Link>
-            <Form />
+            <Form id={this.props.params ? this.props.params.id : undefined} />
         </div>
       </ReactCSSTransitionGroup>
     );
