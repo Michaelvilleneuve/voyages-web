@@ -1,5 +1,5 @@
 import { browserHistory } from 'react-router';
-import { LIST, VALIDATE_FORM } from '../types/voyages';
+import { LIST, VALIDATE_FORM, CREATING_VOYAGE } from '../types/voyages';
 import API from '../api/api';
 
 export function setList() {
@@ -30,6 +30,8 @@ export function createVoyage(form) {
       });
     }
 
+    dispatch({ type: CREATING_VOYAGE, payload: true });
+
     const reader = new FileReader();
     reader.readAsDataURL(form.file);
     reader.addEventListener('load', () => {
@@ -37,6 +39,7 @@ export function createVoyage(form) {
       API.post('/journeys/', data)
       .then((res) => res.json())
       .then((journey) => {
+        dispatch({ type: CREATING_VOYAGE, payload: false });
         if ('errors' in journey) {
           renderFormErrors(journey, dispatch);
         } else {
