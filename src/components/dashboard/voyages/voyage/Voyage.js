@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardActions, CardTitle, CardText, CardMedia } from 'material-ui/Card';
+import { Link } from 'react-router';
 import moment from 'moment';
 import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
@@ -45,7 +46,9 @@ class Voyage extends Component {
         </CardText>
         <CardActions>
           <FlatButton label="Revivre" />
-          <FlatButton label="Modifier" primary />
+          <Link to={`/voyages/${voyage._id}/edit`}>
+            <FlatButton label="Modifier" primary />
+          </Link>
           <FlatButton label="Supprimer" secondary onClick={this.deleteVoyage.bind(this)} />
         </CardActions>
       </Card>
