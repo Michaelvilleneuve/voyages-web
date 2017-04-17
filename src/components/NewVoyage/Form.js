@@ -7,11 +7,22 @@ import { DatePicker, TextField, Toggle, FlatButton } from 'material-ui';
 import FileUpload from 'material-ui/svg-icons/file/cloud-upload';
 import Dropzone from 'react-dropzone';
 import Place from 'material-ui-geosuggest';
+import API from '../../api/api';
 import * as voyagesActions from '../../actions/voyages';
 import './Form.css';
 
 class Form extends Component {
   state = {}
+
+  componentDidMount() {
+    if (this.props.id) {
+      API.get(`/journeys/${this.props.id}`)
+        .then(res => res.json())
+        .then(voyage => {
+          this.setState({ ...voyage, file: voyage.image });
+        });
+    }
+  }
 
   onDrop(files) {
     this.setState({ file: files[0] });
@@ -64,11 +75,12 @@ class Form extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div style={{ width: '90%', paddingTop: 30, maxWidth: 670 }}>
         <Card>
           <CardTitle
-            title="Créer un voyage"
+            title={this.state._id ? 'Modifier votre voyage' : 'Créer un voyage'}
             subtitle="C'est le début de l'aventure"
           />
           <CardText>
@@ -78,6 +90,7 @@ class Form extends Component {
               fullWidth
               errorText={this.props.errors.title}
               onChange={this.changed.bind(this)}
+              value={this.state.title}
             />
             <DatePicker
               locale="fr"
@@ -86,6 +99,7 @@ class Form extends Component {
               DateTimeFormat={global.Intl.DateTimeFormat}
               errorText={this.props.errors.starts_at}
               hintText="Début" fullWidth onChange={(e, d) => this.dateChanged('starts_at', d)}
+              defaultDate={this.state.starts_at ? new Date(this.state.starts_at) : undefined}
             />
             <DatePicker
               locale="fr"
@@ -94,6 +108,7 @@ class Form extends Component {
               cancelLabel="Annuler"
               errorText={this.props.errors.ends_at}
               hintText="Fin" fullWidth onChange={(e, d) => this.dateChanged('ends_at', d)}
+              defaultDate={this.state.starts_at ? new Date(this.state.starts_at) : undefined}
             />
             <Place
               fullWidth
@@ -111,6 +126,7 @@ class Form extends Component {
               rows={4}
               errorText={this.props.errors.description}
               onChange={this.changed.bind(this)}
+              value={this.state.description}
             />
               <Dropzone
                 className="dropzone"
@@ -150,7 +166,7 @@ class Form extends Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators(voyagesActions, dispatch);
 const mapStateToProps = ({ voyages }) => {
-  return { errors: voyages.errors };
+  return { errors: voyages.errors, creating: voyages.creating };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
