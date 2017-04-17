@@ -13,6 +13,7 @@ const Routes = () => {
         <IndexRoute component={LoginForm} />
         <Route path="dashboard" component={Dashboard} />
         <Route path="voyages/new" component={NewVoyage} />
+        <Route path="voyages/:id/edit" component={NewVoyage} />
         <Route path="*" component={NoMatch} />
       </Route>
     </Router>
