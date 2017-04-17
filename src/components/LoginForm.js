@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import { browserHistory } from 'react-router';
+import isConnected from '../api/connection';
 import * as userActions from '../actions/user';
 import Center from './shared/Center';
 import './LoginForm.css';
@@ -15,6 +17,10 @@ class LoginForm extends Component {
     email: '',
     name: '',
     login: true
+  }
+
+  conponentWillMount() {
+    if (isConnected()) browserHistory.push('/dashboard');
   }
 
   mailChanged(e) { this.setState({ email: e.target.value }); }
