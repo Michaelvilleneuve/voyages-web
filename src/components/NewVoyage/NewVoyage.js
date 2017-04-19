@@ -16,7 +16,7 @@ export default class NewVoyage extends Component {
         transitionEnterTimeout={500}
         transitionLeaveTimeout={300}
       >
-        <div className="flex-center new-voyage">
+        <div className="new-voyage">
           <Link to="/dashboard">
             <FloatingActionButton style={{ position: 'fixed', top: 50, left: 50 }}>
               <Arrow />
