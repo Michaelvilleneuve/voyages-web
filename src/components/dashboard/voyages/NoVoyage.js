@@ -7,8 +7,8 @@ const NoVoyage = () => {
   return (
     <Center>
       <Card style={{ width: '90%', maxWidth: 600 }}>
-        <CardTitle>Oh non ! :(</CardTitle>
-        <CardText>Vous n'avez fait aucun voyage pour le moment.</CardText>
+        <CardTitle>Oh non 😭😭...</CardTitle>
+        <CardText>Tu n'as fait aucun voyage pour le moment... 😔</CardText>
       </Card>
     </Center>
   );
