@@ -42,6 +42,14 @@ const API = {
     }).then(response => API.checkStatus(response));
   },
 
+  async put(url, data, headers = {}) {
+    return fetch(this.getUrl(url), {
+      headers: await API.headers(headers),
+      method: 'PUT',
+      body: data
+    }).then(response => API.checkStatus(response));
+  },
+
   checkStatus(response) {
     if (response.status === 401) {
       sessionStorage.removeItem('token');
