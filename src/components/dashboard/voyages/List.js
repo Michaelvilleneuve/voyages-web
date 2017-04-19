@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as voyagesActions from '../../../actions/voyages';
 import Voyage from './voyage/Voyage';
+import NoVoyage from './NoVoyage';
 import './List.css';
 
 class List extends Component {
@@ -11,7 +12,7 @@ class List extends Component {
   }
 
   renderEmpty() {
-    if (this.props.journeys.length === 0) return (<p>Vous n'avez aucun voyage.</p>);
+    if (this.props.journeys.length === 0) return <NoVoyage />;
   }
 
   render() {
