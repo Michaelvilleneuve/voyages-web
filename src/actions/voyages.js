@@ -21,33 +21,38 @@ function fetchVoyages(dispatch) {
 
 export function createVoyage(form) {
   return (dispatch) => {
-    if (!form.file) {
-      return dispatch({
-        type: VALIDATE_FORM,
-        payload: {
-          image: 'Vous devez fournir une image de couverture'
-        }
-      });
-    }
-
     dispatch({ type: CREATING_VOYAGE, payload: true });
+    console.log(!form.file, form.file);
+    if (!form.file) return sendVoyage(dispatch, form);
 
     const reader = new FileReader();
     reader.readAsDataURL(form.file);
     reader.addEventListener('load', () => {
-      const data = JSON.stringify(Object.assign({ image: reader.result }, form));
-      API.post('/journeys/', data)
-      .then((res) => res.json())
-      .then((journey) => {
-        dispatch({ type: CREATING_VOYAGE, payload: false });
-        if ('errors' in journey) {
-          renderFormErrors(journey, dispatch);
-        } else {
-          browserHistory.push('/dashboard');
-        }
-      });
+      sendVoyage(dispatch, Object.assign({ image: reader.result }, form));
     });
   };
+}
+
+function sendVoyage(dispatch, data) {
+  return createOrUpdate(data)
+    .then((res) => res.json())
+    .then((journey) => {
+      dispatch({ type: CREATING_VOYAGE, payload: false });
+      if ('errors' in journey) {
+        renderFormErrors(journey, dispatch);
+      } else {
+        browserHistory.push('/dashboard');
+      }
+    })
+    .catch(() => {
+      dispatch({ type: CREATING_VOYAGE, payload: false });
+    });
+}
+
+function createOrUpdate(data) {
+  const json = JSON.stringify(data);
+  if (data._id) return API.put(`/journeys/${data._id}`, json);
+  return API.post('/journeys/', json);
 }
 
 export function deleteVoyage(id) {
