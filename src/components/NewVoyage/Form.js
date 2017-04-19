@@ -81,8 +81,8 @@ class Form extends Component {
   }
 
   render() {
-    const date = this.state.starts_at ? new Date(this.state.starts_at) : undefined;
-    console.log(date);
+    const dateStart = this.state.starts_at ? new Date(this.state.starts_at) : undefined;
+    const dateEnd = this.state.ends_at ? new Date(this.state.ends_at) : undefined;
     return (
       <div style={{ width: '90%', maxWidth: 670, margin: '30px auto' }}>
         <Card>
@@ -106,7 +106,7 @@ class Form extends Component {
               DateTimeFormat={global.Intl.DateTimeFormat}
               errorText={this.props.errors.starts_at}
               hintText="Début" fullWidth onChange={(e, d) => this.dateChanged('starts_at', d)}
-              value={date}
+              value={dateStart}
             />
             <DatePicker
               locale="fr"
@@ -115,7 +115,7 @@ class Form extends Component {
               cancelLabel="Annuler"
               errorText={this.props.errors.ends_at}
               hintText="Fin" fullWidth onChange={(e, d) => this.dateChanged('ends_at', d)}
-              value={this.state.starts_at ? new Date(this.state.starts_at) : undefined}
+              value={dateEnd}
             />
             <Place
               fullWidth
