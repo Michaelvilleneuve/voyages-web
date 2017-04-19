@@ -7,8 +7,9 @@ import { DatePicker, TextField, Toggle, FlatButton } from 'material-ui';
 import FileUpload from 'material-ui/svg-icons/file/cloud-upload';
 import Dropzone from 'react-dropzone';
 import Place from 'material-ui-geosuggest';
-import API from '../../api/api';
 import * as voyagesActions from '../../actions/voyages';
+import config from '../../config';
+import API from '../../api/api';
 import './Form.css';
 
 class Form extends Component {
@@ -19,7 +20,7 @@ class Form extends Component {
       API.get(`/journeys/${this.props.id}`)
         .then(res => res.json())
         .then(voyage => {
-          this.setState({ ...voyage, file: voyage.image });
+          this.setState({ ...voyage });
         });
     }
   }
@@ -51,9 +52,14 @@ class Form extends Component {
   }
 
   renderImage() {
-    if (!this.state.file) return null;
+    if (!this.state.file && !this.state.image) return null;
+    const src = this.state.file ? this.state.file.preview : config.api.assets(this.state.image);
     return (
-      <img src={this.state.file.preview} alt="Couverture" style={{ width: 100 }} />
+      <img
+        src={src}
+        alt="Couverture"
+        style={{ width: 100 }}
+      />
     );
   }
 
@@ -75,9 +81,10 @@ class Form extends Component {
   }
 
   render() {
-    console.log(this.state);
+    const date = this.state.starts_at ? new Date(this.state.starts_at) : undefined;
+    console.log(date);
     return (
-      <div style={{ width: '90%', paddingTop: 30, maxWidth: 670 }}>
+      <div style={{ width: '90%', maxWidth: 670, margin: '30px auto' }}>
         <Card>
           <CardTitle
             title={this.state._id ? 'Modifier votre voyage' : 'Créer un voyage'}
@@ -99,7 +106,7 @@ class Form extends Component {
               DateTimeFormat={global.Intl.DateTimeFormat}
               errorText={this.props.errors.starts_at}
               hintText="Début" fullWidth onChange={(e, d) => this.dateChanged('starts_at', d)}
-              defaultDate={this.state.starts_at ? new Date(this.state.starts_at) : undefined}
+              value={date}
             />
             <DatePicker
               locale="fr"
@@ -108,7 +115,7 @@ class Form extends Component {
               cancelLabel="Annuler"
               errorText={this.props.errors.ends_at}
               hintText="Fin" fullWidth onChange={(e, d) => this.dateChanged('ends_at', d)}
-              defaultDate={this.state.starts_at ? new Date(this.state.starts_at) : undefined}
+              value={this.state.starts_at ? new Date(this.state.starts_at) : undefined}
             />
             <Place
               fullWidth
@@ -136,7 +143,8 @@ class Form extends Component {
                 <div style={{ textAlign: 'center' }}>
                   <FileUpload color="#999" width={40} />
                   <p style={{ color: '#999' }}>
-                    {this.state.file ? 'Changer d\'image' : 'Image de couverture' }
+                    {this.state.file || this.state.image ?
+                      'Changer d\'image' : 'Image de couverture' }
                   </p>
                   <p style={{ color: 'red' }}>
                     {this.props.errors.image}
@@ -152,6 +160,7 @@ class Form extends Component {
               labelPosition="right"
               errorText={this.props.errors.public}
               label="Rendre mon voyage public"
+              value={this.state.public}
             />
             <br />
           </CardText>
